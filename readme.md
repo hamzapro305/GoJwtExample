@@ -1,4 +1,3 @@
-```markdown
 # Go Lang JWT Example Project
 
 This project demonstrates how to implement a secure authentication system using JWT (JSON Web Tokens) in Go (Golang). It uses the **Fiber** web framework for fast HTTP handling, **MongoDB** for user data storage, and **bcrypt** for secure password hashing. With Docker Compose, this project can be easily set up and run in a containerized environment.
@@ -93,4 +92,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 For further questions or contributions, feel free to open an issue or pull request on the repository.
-```
