@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+    app-db:
+        image: mongo:latest
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        expose:
+            - "27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=admin
+            - MONGO_INITDB_DATABASE=auth-db
+
+    auth-service:
+        build: .
+        deploy:
+            replicas: 2
+        restart: unless-stopped
+        depends_on:
+            - app-db
+        environment:
+            - MONGODB_URI=mongodb://admin:admin@app-db:27017/?authSource=admin
+    
+    auth-proxy:
+        image: nginx:latest
+        volumes:
+            - ./conf.d:/etc/nginx/conf.d
+        depends_on:
+            - auth-service
+        ports:
+            - "3000:3000"
